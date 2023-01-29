@@ -1,5 +1,5 @@
 lib/
-.DS_TORE
+.DS_Store
 
 .yarn/*
 !.yarn/patches
