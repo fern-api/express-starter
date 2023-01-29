@@ -1,0 +1,25 @@
+name: "Check"
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  fern-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install fern
+        run: npm install -g fern-api
+      - name: fern check
+        run: fern check
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: Check formatting
+        run: yarn format:check
+      - name: Compile frontend
+        run: yarn compile
