@@ -29,6 +29,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@types/express", "npm:4.17.16"],\
+            ["@types/node", "npm:18.11.18"],\
             ["@typescript-eslint/eslint-plugin", "virtual:98ef2051bd3842e546af8f3b434cc87c0af5aba935f99f79358638b5ed74523aae5d1b0bcfebd0a6ed0bd7aea290552450913ba1afbbd93bf0f5b55ebe4f1479#npm:5.49.0"],\
             ["@typescript-eslint/parser", "virtual:98ef2051bd3842e546af8f3b434cc87c0af5aba935f99f79358638b5ed74523aae5d1b0bcfebd0a6ed0bd7aea290552450913ba1afbbd93bf0f5b55ebe4f1479#npm:5.49.0"],\
             ["eslint", "npm:8.33.0"],\
@@ -1501,6 +1502,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["fern-express-starter", "workspace:."],\
             ["@types/express", "npm:4.17.16"],\
+            ["@types/node", "npm:18.11.18"],\
             ["@typescript-eslint/eslint-plugin", "virtual:98ef2051bd3842e546af8f3b434cc87c0af5aba935f99f79358638b5ed74523aae5d1b0bcfebd0a6ed0bd7aea290552450913ba1afbbd93bf0f5b55ebe4f1479#npm:5.49.0"],\
             ["@typescript-eslint/parser", "virtual:98ef2051bd3842e546af8f3b434cc87c0af5aba935f99f79358638b5ed74523aae5d1b0bcfebd0a6ed0bd7aea290552450913ba1afbbd93bf0f5b55ebe4f1479#npm:5.49.0"],\
             ["eslint", "npm:8.33.0"],\
@@ -3151,7 +3153,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.3"],\
-            ["@types/node", null],\
+            ["@types/node", "npm:18.11.18"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
