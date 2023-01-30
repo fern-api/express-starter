@@ -3,7 +3,7 @@ groups:
   external:
     generators:
       - name: fernapi/fern-typescript-express
-        version: 0.0.267
+        version: 0.0.269
         output:
           location: local-file-system
           path: ../../src/api/generated

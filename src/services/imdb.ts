@@ -22,6 +22,6 @@ export class ImdbService extends FernApi.imdb.AbstractImdbService {
         rating: 4.9,
       };
     }
-    throw new Error("Movie does not exist");
+    throw new FernApi.MovieDoesNotExistError();
   }
 }
