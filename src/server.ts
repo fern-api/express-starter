@@ -1,13 +1,13 @@
 import express from "express";
 import { register } from "./api";
-import { ImdbService } from "./services/imdb";
+import imdb from "./services/imdb";
 
 const PORT = 8080;
 
 const app = express();
 
 register(app, {
-  imdb: new ImdbService(),
+  imdb,
 });
 
 app.listen(PORT);
