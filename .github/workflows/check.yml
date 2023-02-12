@@ -24,4 +24,4 @@ jobs:
       - name: Check formatting
         run: yarn format:check
       - name: Compile
-        run: yarn compile
+        run: yarn build
