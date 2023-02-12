@@ -2,8 +2,9 @@
   "name": "fern-express-starter",
   "packageManager": "yarn@3.3.1",
   "scripts": {
-    "compile": "tsc",
-    "start": "nodemon src/server.ts",
+    "build": "tsc",
+    "start": "node lib/server.js",
+    "dev": "nodemon src/server.ts",
     "format": "prettier --write src/**",
     "format:check": "prettier --check src/**",
     "lint": "eslint",
