@@ -29,7 +29,7 @@ fern generate
 
 ```
 yarn install
-yarn start
+yarn dev
 ```
 
 Now you can cURL the server!
