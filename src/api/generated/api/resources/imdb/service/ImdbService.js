@@ -50,8 +50,11 @@ class ImdbService {
             if (request.ok) {
                 req.body = request.value;
                 try {
-                    const response = await this.methods.createMovie(req, res);
-                    res.json(await serializers.MovieId.jsonOrThrow(response));
+                    await this.methods.createMovie(req, {
+                        send: async (responseBody) => {
+                            res.json(await serializers.MovieId.jsonOrThrow(responseBody));
+                        },
+                    });
                     next();
                 }
                 catch (error) {
@@ -77,8 +80,11 @@ class ImdbService {
         });
         this.router.get("/:movieId", async (req, res, next) => {
             try {
-                const response = await this.methods.getMovie(req, res);
-                res.json(await serializers.Movie.jsonOrThrow(response));
+                await this.methods.getMovie(req, {
+                    send: async (responseBody) => {
+                        res.json(await serializers.Movie.jsonOrThrow(responseBody));
+                    },
+                });
                 next();
             }
             catch (error) {

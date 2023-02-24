@@ -5,10 +5,14 @@ import { FernApi } from "../../../..";
 import express from "express";
 import * as serializers from "../../../../serialization";
 export interface ImdbServiceMethods {
-    createMovie(req: express.Request<never, FernApi.MovieId, FernApi.CreateMovieRequest, never>, res: express.Response): FernApi.MovieId | Promise<FernApi.MovieId>;
+    createMovie(req: express.Request<never, FernApi.MovieId, FernApi.CreateMovieRequest, never>, res: {
+        send: (responseBody: FernApi.MovieId) => Promise<void>;
+    }): void | Promise<void>;
     getMovie(req: express.Request<{
         movieId: serializers.MovieId.Raw;
-    }, FernApi.Movie, never, never>, res: express.Response): FernApi.Movie | Promise<FernApi.Movie>;
+    }, FernApi.Movie, never, never>, res: {
+        send: (responseBody: FernApi.Movie) => Promise<void>;
+    }): void | Promise<void>;
 }
 export declare class ImdbService {
     private readonly methods;

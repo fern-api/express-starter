@@ -28,7 +28,7 @@ function object(schemas) {
                     valueSchema,
                 };
                 rawKeyToProperty[rawKey] = property;
-                if ((await valueSchema.getType()) !== "optional") {
+                if (await isSchemaRequired(valueSchema)) {
                     requiredKeys.push(rawKey);
                 }
             }
@@ -54,7 +54,7 @@ function object(schemas) {
                 const valueSchema = (0, property_1.isProperty)(schemaOrObjectProperty)
                     ? schemaOrObjectProperty.valueSchema
                     : schemaOrObjectProperty;
-                if ((await valueSchema.getType()) !== "optional") {
+                if (await isSchemaRequired(valueSchema)) {
                     requiredKeys.push(parsedKey);
                 }
             }
@@ -214,5 +214,18 @@ async function validateAndTransformExtendedObject({ extensionKeys, value, transf
                 ...(transformedExtension.ok ? [] : transformedExtension.errors),
             ],
         };
+    }
+}
+async function isSchemaRequired(schema) {
+    return !(await isSchemaOptional(schema));
+}
+async function isSchemaOptional(schema) {
+    switch (await schema.getType()) {
+        case Schema_1.SchemaType.ANY:
+        case Schema_1.SchemaType.UNKNOWN:
+        case Schema_1.SchemaType.OPTIONAL:
+            return true;
+        default:
+            return false;
     }
 }
