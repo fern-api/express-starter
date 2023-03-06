@@ -52,8 +52,10 @@ class ImdbService {
                 try {
                     await this.methods.createMovie(req, {
                         send: async (responseBody) => {
-                            res.json(await serializers.MovieId.jsonOrThrow(responseBody));
+                            res.json(await serializers.MovieId.jsonOrThrow(responseBody, { unrecognizedObjectKeys: "strip" }));
                         },
+                        cookie: res.cookie.bind(res),
+                        locals: res.locals,
                     });
                     next();
                 }
@@ -82,8 +84,10 @@ class ImdbService {
             try {
                 await this.methods.getMovie(req, {
                     send: async (responseBody) => {
-                        res.json(await serializers.Movie.jsonOrThrow(responseBody));
+                        res.json(await serializers.Movie.jsonOrThrow(responseBody, { unrecognizedObjectKeys: "strip" }));
                     },
+                    cookie: res.cookie.bind(res),
+                    locals: res.locals,
                 });
                 next();
             }

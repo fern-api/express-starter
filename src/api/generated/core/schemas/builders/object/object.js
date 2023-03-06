@@ -45,7 +45,7 @@ function object(schemas) {
                         transform: (propertyValue) => property.valueSchema.parse(propertyValue, opts),
                     };
                 },
-                allowUnknownKeys: opts?.allowUnknownKeys ?? false,
+                unrecognizedObjectKeys: opts?.unrecognizedObjectKeys,
             });
         },
         json: async (parsed, opts) => {
@@ -80,7 +80,7 @@ function object(schemas) {
                         };
                     }
                 },
-                allowUnknownKeys: opts?.allowUnknownKeys ?? false,
+                unrecognizedObjectKeys: opts?.unrecognizedObjectKeys,
             });
         },
         getType: () => Schema_1.SchemaType.OBJECT,
@@ -93,7 +93,7 @@ function object(schemas) {
     };
 }
 exports.object = object;
-async function validateAndTransformObject({ value, requiredKeys, getProperty, allowUnknownKeys, }) {
+async function validateAndTransformObject({ value, requiredKeys, getProperty, unrecognizedObjectKeys = "fail", }) {
     if (!(0, isPlainObject_1.isPlainObject)(value)) {
         return {
             ok: false,
@@ -123,14 +123,20 @@ async function validateAndTransformObject({ value, requiredKeys, getProperty, al
                 })));
             }
         }
-        else if (allowUnknownKeys) {
-            transformed[preTransformedKey] = preTransformedItemValue;
-        }
         else {
-            errors.push({
-                path: [preTransformedKey],
-                message: `Unrecognized key "${preTransformedKey}"`,
-            });
+            switch (unrecognizedObjectKeys) {
+                case "fail":
+                    errors.push({
+                        path: [preTransformedKey],
+                        message: `Unrecognized key "${preTransformedKey}"`,
+                    });
+                    break;
+                case "strip":
+                    break;
+                case "passthrough":
+                    transformed[preTransformedKey] = preTransformedItemValue;
+                    break;
+            }
         }
     }
     errors.push(...requiredKeys
