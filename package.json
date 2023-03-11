@@ -1,6 +1,5 @@
 {
   "name": "fern-express-starter",
-  "packageManager": "yarn@3.3.1",
   "scripts": {
     "build": "tsc",
     "start": "node lib/server.js",
