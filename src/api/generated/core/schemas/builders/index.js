@@ -25,4 +25,5 @@ __exportStar(require("./primitives"), exports);
 __exportStar(require("./record"), exports);
 __exportStar(require("./schema-utils"), exports);
 __exportStar(require("./set"), exports);
+__exportStar(require("./undiscriminated-union"), exports);
 __exportStar(require("./union"), exports);

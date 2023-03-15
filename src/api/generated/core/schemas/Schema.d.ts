@@ -22,6 +22,7 @@ export declare const SchemaType: {
     readonly RECORD: "record";
     readonly SET: "set";
     readonly UNION: "union";
+    readonly UNDISCRIMINATED_UNION: "undiscriminatedUnion";
     readonly OPTIONAL: "optional";
 };
 export declare type SchemaType = typeof SchemaType[keyof typeof SchemaType];

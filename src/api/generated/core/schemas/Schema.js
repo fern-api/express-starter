@@ -15,5 +15,6 @@ exports.SchemaType = {
     RECORD: "record",
     SET: "set",
     UNION: "union",
+    UNDISCRIMINATED_UNION: "undiscriminatedUnion",
     OPTIONAL: "optional",
 };

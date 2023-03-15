@@ -33,7 +33,7 @@ class MovieDoesNotExistError extends errors.FernApiError {
         super();
         Object.setPrototypeOf(this, MovieDoesNotExistError.prototype);
     }
-    send(res) {
+    async send(res) {
         res.sendStatus(404);
     }
 }

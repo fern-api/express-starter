@@ -65,7 +65,7 @@ class ImdbService {
                         console.warn(`Endpoint 'createMovie' unexpectedly threw ${error.constructor.name}.` +
                             ` If this was intentional, please add ${error.constructor.name} to` +
                             " the endpoint's errors list in your Fern Definition.");
-                        error.send(res);
+                        await error.send(res);
                     }
                     else {
                         res.status(500).json("Internal Server Error");
@@ -102,7 +102,7 @@ class ImdbService {
                                 ` If this was intentional, please add ${error.constructor.name} to` +
                                 " the endpoint's errors list in your Fern Definition.");
                     }
-                    error.send(res);
+                    await error.send(res);
                 }
                 else {
                     res.status(500).json("Internal Server Error");
