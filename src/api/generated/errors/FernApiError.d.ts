@@ -4,5 +4,5 @@
 import express from "express";
 export declare abstract class FernApiError extends Error {
     constructor();
-    abstract send(res: express.Response): void;
+    abstract send(res: express.Response): Promise<void>;
 }

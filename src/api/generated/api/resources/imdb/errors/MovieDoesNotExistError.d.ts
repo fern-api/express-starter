@@ -5,5 +5,5 @@ import * as errors from "../../../../errors";
 import express from "express";
 export declare class MovieDoesNotExistError extends errors.FernApiError {
     constructor();
-    send(res: express.Response): void;
+    send(res: express.Response): Promise<void>;
 }
