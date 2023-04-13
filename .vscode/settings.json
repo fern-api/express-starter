@@ -1,12 +1,12 @@
 {
-	"search.exclude": {
-		"**/.yarn": true,
-		"**/.pnp.*": true
-	},
-	"editor.formatOnSave": true,
-	"[typescript]": {
-		"editor.codeActionsOnSave": {
-			"source.organizeImports": true
-		}
-	}
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  }
 }
