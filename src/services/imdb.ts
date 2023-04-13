@@ -1,3 +1,4 @@
+// this `FernApi` export is generated from your organization name in fern.config.json:
 import { FernApi } from "../api";
 import { ImdbService } from "../api/generated/api/resources/imdb/service/ImdbService";
 
