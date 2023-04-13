@@ -16,7 +16,7 @@ jobs:
       - name: fern generate
         run: fern generate
         env:
-          FERN_TOKEN: dummy
+          FERN_TOKEN: ${{ secrets.FERN_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Lint
