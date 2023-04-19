@@ -2,7 +2,7 @@ import express from "express";
 import { register } from "./api/generated";
 import imdb from "./services/imdb";
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 
