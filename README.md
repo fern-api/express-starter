@@ -17,7 +17,7 @@
 
 This repo is a starter repo for building an Express server using [Fern](https://github.com/fern-api/fern).
 
-**Fern is an open source toolkit for designing, building, and consuming REST APIs.** With Fern, you can generate client libraries, API documentation, and boilerplate for your backend server.
+**Fern is an open source toolkit for generating client libraries, API documentation, and boilerplate for your backend server.** 
 
 With Fern, you:
 
