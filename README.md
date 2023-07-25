@@ -1,8 +1,25 @@
+<br/>
+<div align="center">
+  <a href="https://www.buildwithfern.com/?utm_source=github&utm_medium=readme&utm_campaign=express-starter&utm_content=logo">
+    <img src="fern.png" height="120" align="center" alt="header" />
+  </a>
+  
+  <br/>
+
 # Express + Fern starter repo
+
+[![Contributors](https://img.shields.io/github/contributors/fern-api/express-starter.svg)](https://GitHub.com/dotnet/docs/graphs/contributors/)
+[![Pulls-merged](https://img.shields.io/github/issues-search/fern-api/express-starter?label=merged%20pull%20requests&query=is%3Apr%20is%3Aclosed%20is%3Amerged&color=darkviolet)](https://github.com/dotnet/docs/pulls?q=is%3Apr+is%3Aclosed+is%3Amerged)
+
+[![Discord](https://img.shields.io/badge/Join%20Our%20Community-black?logo=discord)](https://discord.com/invite/JkkXumPzcG)
+
+</div>
 
 This repo is a starter repo for building an Express server using [Fern](https://github.com/fern-api/fern).
 
-**Fern is an open source format for defining REST APIs.** Fern makes it easy to:
+**Fern is an open source toolkit for designing, building, and consuming REST APIs.** With Fern, you can generate client libraries, API documentation, and boilerplate for your backend server.
+
+With Fern, you:
 
 1. Define your API
 1. Implement your API on the backend
@@ -75,9 +92,9 @@ endpoint, you'll get a compile error:
 
 ## Changing the API
 
-The API is defined using [Fern](https://www.buildwithfern.comhttps://www.buildwithfern.com/). The definition
+The API is defined using the [Fern specification](https://github.com/fern-api/fern/blob/main/README.md#fern-and-openapi) which is a simpler format than an OpenAPI specification. The API definition
 lives in the [fern/](fern/api/definition) directory. You can edit these YAML files
-to update the API. Check out the [docs](https://docs.buildwithfern.com/definition) to read more about defining APIs.
+to update the API. Check out the [docs](https://buildwithfern.com/docs/definition) to read more about defining APIs.
 
 Most of the server code in this repo is **automatically generated
 by Fern.** You can regenerate the code using the Fern CLI:
@@ -94,6 +111,6 @@ the API correctly.
 
 ## Issues & contributing
 
-If you run into any problems while using this ticket, plesae [file an
-issue](https://github.com/fern-api/express-starter/issues). Of course, PRs are
+If you run into any problems, join [our discord](https://discord.com/invite/JkkXumPzcG) or [file an
+issue](https://github.com/fern-api/express-starter/issues). PRs are
 welcome and encouraged!
