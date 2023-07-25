@@ -92,7 +92,7 @@ endpoint, you'll get a compile error:
 
 ## Changing the API
 
-The API is defined using the [Fern specification](https://github.com/fern-api/fern/blob/main/README.md#fern-and-openapi) which is a simpler format than an OpenAPI specification. The API definition
+The API in this starter repo is defined using the [Fern specification](https://github.com/fern-api/fern/blob/main/README.md#fern-and-openapi). The API definition
 lives in the [fern/](fern/api/definition) directory. You can edit these YAML files
 to update the API. Check out the [docs](https://buildwithfern.com/docs/definition) to read more about defining APIs.
 
@@ -111,6 +111,10 @@ the API correctly.
 
 ## Issues & contributing
 
-If you run into any problems, join [our discord](https://discord.com/invite/JkkXumPzcG) or [file an
+If you run into any problems, [join our discord](https://discord.com/invite/JkkXumPzcG) or [file an
 issue](https://github.com/fern-api/express-starter/issues). PRs are
 welcome and encouraged!
+
+<a href="https://github.com/fern-api/express-starter/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=fern-api/express-starter" />
+</a>
