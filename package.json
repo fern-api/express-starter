@@ -16,7 +16,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.16",
-    "@types/node": "^18.11.18",
+    "@types/node": "^20.14.8",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "prettier": "^3.1.0",
