@@ -25,47 +25,57 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImdbService = void 0;
 const express_1 = __importDefault(require("express"));
-const serializers = __importStar(require("../../../../serialization"));
-const errors = __importStar(require("../../../../errors"));
+const serializers = __importStar(require("../../../../serialization/index"));
+const errors = __importStar(require("../../../../errors/index"));
 class ImdbService {
-    methods;
-    router;
     constructor(methods, middleware = []) {
         this.methods = methods;
-        this.router = express_1.default.Router({ mergeParams: true }).use(express_1.default.json(), ...middleware);
+        this.router = express_1.default.Router({ mergeParams: true }).use(express_1.default.json({
+            strict: false,
+        }), ...middleware);
     }
     addMiddleware(handler) {
         this.router.use(handler);
         return this;
     }
     toRouter() {
-        this.router.post("/create-movie", async (req, res, next) => {
-            const request = await serializers.CreateMovieRequest.parse(req.body);
+        this.router.post("/create-movie", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            const request = yield serializers.CreateMovieRequest.parse(req.body);
             if (request.ok) {
                 req.body = request.value;
                 try {
-                    await this.methods.createMovie(req, {
-                        send: async (responseBody) => {
-                            res.json(await serializers.MovieId.jsonOrThrow(responseBody, { unrecognizedObjectKeys: "strip" }));
-                        },
+                    yield this.methods.createMovie(req, {
+                        send: (responseBody) => __awaiter(this, void 0, void 0, function* () {
+                            res.json(yield serializers.MovieId.jsonOrThrow(responseBody, {
+                                unrecognizedObjectKeys: "strip",
+                            }));
+                        }),
                         cookie: res.cookie.bind(res),
                         locals: res.locals,
-                    });
+                    }, next);
                     next();
                 }
                 catch (error) {
-                    console.error(error);
                     if (error instanceof errors.FernApiError) {
                         console.warn(`Endpoint 'createMovie' unexpectedly threw ${error.constructor.name}.` +
                             ` If this was intentional, please add ${error.constructor.name} to` +
                             " the endpoint's errors list in your Fern Definition.");
-                        await error.send(res);
+                        yield error.send(res);
                     }
                     else {
                         res.status(500).json("Internal Server Error");
@@ -79,22 +89,21 @@ class ImdbService {
                 });
                 next(request.errors);
             }
-        });
-        this.router.get("/:movieId", async (req, res, next) => {
+        }));
+        this.router.get("/:movieId", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                await this.methods.getMovie(req, {
-                    send: async (responseBody) => {
-                        res.json(await serializers.Movie.jsonOrThrow(responseBody, { unrecognizedObjectKeys: "strip" }));
-                    },
+                yield this.methods.getMovie(req, {
+                    send: (responseBody) => __awaiter(this, void 0, void 0, function* () {
+                        res.json(yield serializers.Movie.jsonOrThrow(responseBody, { unrecognizedObjectKeys: "strip" }));
+                    }),
                     cookie: res.cookie.bind(res),
                     locals: res.locals,
-                });
+                }, next);
                 next();
             }
             catch (error) {
-                console.error(error);
                 if (error instanceof errors.FernApiError) {
-                    switch (error.constructor.name) {
+                    switch (error.errorName) {
                         case "MovieDoesNotExistError":
                             break;
                         default:
@@ -102,14 +111,14 @@ class ImdbService {
                                 ` If this was intentional, please add ${error.constructor.name} to` +
                                 " the endpoint's errors list in your Fern Definition.");
                     }
-                    await error.send(res);
+                    yield error.send(res);
                 }
                 else {
                     res.status(500).json("Internal Server Error");
                 }
                 next(error);
             }
-        });
+        }));
         return this.router;
     }
 }

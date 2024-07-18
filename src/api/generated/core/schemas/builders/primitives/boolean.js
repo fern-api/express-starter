@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.boolean = void 0;
 const Schema_1 = require("../../Schema");
 const createIdentitySchemaCreator_1 = require("../../utils/createIdentitySchemaCreator");
-exports.boolean = (0, createIdentitySchemaCreator_1.createIdentitySchemaCreator)(Schema_1.SchemaType.BOOLEAN, (value) => {
+const getErrorMessageForIncorrectType_1 = require("../../utils/getErrorMessageForIncorrectType");
+exports.boolean = (0, createIdentitySchemaCreator_1.createIdentitySchemaCreator)(Schema_1.SchemaType.BOOLEAN, (value, { breadcrumbsPrefix = [] } = {}) => {
     if (typeof value === "boolean") {
         return {
             ok: true,
@@ -15,8 +16,8 @@ exports.boolean = (0, createIdentitySchemaCreator_1.createIdentitySchemaCreator)
             ok: false,
             errors: [
                 {
-                    path: [],
-                    message: "Not a boolean",
+                    path: breadcrumbsPrefix,
+                    message: (0, getErrorMessageForIncorrectType_1.getErrorMessageForIncorrectType)(value, "boolean"),
                 },
             ],
         };

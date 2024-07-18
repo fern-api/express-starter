@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.number = void 0;
 const Schema_1 = require("../../Schema");
 const createIdentitySchemaCreator_1 = require("../../utils/createIdentitySchemaCreator");
-exports.number = (0, createIdentitySchemaCreator_1.createIdentitySchemaCreator)(Schema_1.SchemaType.NUMBER, (value) => {
+const getErrorMessageForIncorrectType_1 = require("../../utils/getErrorMessageForIncorrectType");
+exports.number = (0, createIdentitySchemaCreator_1.createIdentitySchemaCreator)(Schema_1.SchemaType.NUMBER, (value, { breadcrumbsPrefix = [] } = {}) => {
     if (typeof value === "number") {
         return {
             ok: true,
@@ -15,8 +16,8 @@ exports.number = (0, createIdentitySchemaCreator_1.createIdentitySchemaCreator)(
             ok: false,
             errors: [
                 {
-                    path: [],
-                    message: "Not a number",
+                    path: breadcrumbsPrefix,
+                    message: (0, getErrorMessageForIncorrectType_1.getErrorMessageForIncorrectType)(value, "number"),
                 },
             ],
         };

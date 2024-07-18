@@ -5,8 +5,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FernApiError = void 0;
 class FernApiError extends Error {
-    constructor() {
+    constructor(errorName) {
         super();
+        this.errorName = errorName;
         Object.setPrototypeOf(this, FernApiError.prototype);
     }
 }
