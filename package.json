@@ -19,7 +19,7 @@
     "@types/node": "^22.5.0",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
-    "prettier": "^3.1.0",
+    "prettier": "^3.3.3",
     "nodemon": "^3.0.2",
     "eslint": "^8.55.0",
     "ts-node": "^10.9.2",
