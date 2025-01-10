@@ -4,7 +4,6 @@
 
 import express from "express";
 import multer from "multer";
-import path from "path";
 import * as errors from "../../../../errors/index";
 import * as serializers from "../../../../serialization/index";
 import * as FernApi from "../../../index";
@@ -58,27 +57,9 @@ export interface ImdbServiceMethods {
 
 export class ImdbService {
     private router;
-    private upload;
+    // private upload;
 
     constructor(private readonly methods: ImdbServiceMethods, middleware: express.RequestHandler[] = []) {
-        // Configure multer storage
-        const storage = multer.diskStorage({
-            destination: (req, file, cb) => {
-                cb(null, 'uploads/');
-            },
-            filename: (req, file, cb) => {
-                cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
-            }
-        });
-
-        // Initialize multer with storage config
-        this.upload = multer({
-            storage: storage,
-            limits: {
-                fileSize: 1024 * 1024 * 100 // 100MB file size limit for videos
-            }
-        });
-
         this.router = express.Router({ mergeParams: true }).use(
             express.json({
                 strict: false,
@@ -92,7 +73,12 @@ export class ImdbService {
         return this;
     }
 
-    public toRouter(): express.Router {
+    public toRouter(multerConfig?: {
+        storage?: multer.StorageEngine;
+        limits?: {
+            fileSize?: number;
+        };
+    }): express.Router {
         this.router.post("/create-movie", async (req, res, next) => {
             const request = serializers.CreateMovieRequest.parse(req.body);
             if (request.ok) {
@@ -167,27 +153,42 @@ export class ImdbService {
                 next(error);
             }
         });
-        this.router.post("/:movieId/upload", this.upload.single('video') as any, async (req, res, next) => {
+        this.router.post("/:movieId/upload", (multer(multerConfig).single('video') as unknown as express.RequestHandler), async (req, res, next) => {
+            console.log('Starting upload movie request...');
             try {
+                console.log('Request headers:', req.headers);
+                console.log('Request params:', req.params);
+                console.log('Request body:', req.body);
+
                 if (!req.file) {
+                    console.log('Error: Missing video file');
                     res.status(400).json({
                         error: "Missing required video file"
                     });
                     return;
                 }
+                console.log('Uploaded file details:', {
+                    filename: req.file.filename,
+                    size: req.file.size,
+                    mimetype: req.file.mimetype
+                });
 
                 const length = parseFloat(req.body.length);
                 if (!length) {
+                    console.log('Error: Missing or invalid length parameter');
                     res.status(400).json({
                         error: "Missing required length parameter"
                     });
                     return;
                 }
+                console.log('Movie length:', length);
 
+                console.log('Calling uploadMovie method...');
                 await this.methods.uploadMovie(
                     req as any,
                     {
                         send: async (responseBody) => {
+                            console.log('Upload successful, sending response');
                             res.json(responseBody);
                         },
                         cookie: res.cookie.bind(res),
@@ -197,12 +198,15 @@ export class ImdbService {
                 );
                 next();
             } catch (error) {
+                console.log('Error occurred during upload:', error);
                 if (error instanceof multer.MulterError) {
                     if (error.code === 'LIMIT_FILE_SIZE') {
+                        console.log('File size limit exceeded');
                         res.status(400).json({
                             error: 'File size is too large. Max size is 100MB'
                         });
                     } else {
+                        console.log('Multer error:', error.code);
                         res.status(400).json({
                             error: error.message
                         });
@@ -217,6 +221,7 @@ export class ImdbService {
                     );
                     await error.send(res);
                 } else {
+                    console.error('Internal server error:', error);
                     res.status(500).json("Internal Server Error");
                 }
                 next(error);

@@ -3,13 +3,20 @@
  */
 
 import express from "express";
+import multer from "multer";
 import { ImdbService } from "./api/resources/imdb/service/ImdbService";
 
 export function register(
     expressApp: express.Express | express.Router,
     services: {
         imdb: ImdbService;
+    }, 
+    multerConfig: {
+        storage?: multer.StorageEngine;
+        limits?: {
+            fileSize?: number;
+        };
     }
 ): void {
-    (expressApp as any).use("/movies", services.imdb.toRouter());
+    (expressApp as any).use("/movies", services.imdb.toRouter(multerConfig));
 }
