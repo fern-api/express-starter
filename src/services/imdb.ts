@@ -22,10 +22,10 @@ export default new ImdbService({
     }
   },
   uploadMovie: async (req, res) => {
-    console.log('Request:', {
-        file: req.file,
-        body: req.body,
-        params: req.params
+    console.log("Request:", {
+      file: req.file,
+      body: req.body,
+      params: req.params,
     });
     // Handle the uploaded movie
     await res.send();
