@@ -21,4 +21,13 @@ export default new ImdbService({
       throw new FernApi.MovieDoesNotExistError();
     }
   },
+  uploadMovie: async (req, res) => {
+    console.log("Request:", {
+      file: req.file,
+      body: req.body,
+      params: req.params,
+    });
+    // Handle the uploaded movie
+    await res.send();
+  },
 });

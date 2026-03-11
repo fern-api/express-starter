@@ -54,6 +54,20 @@ service:
       errors:
         - MovieDoesNotExistError
 
+    uploadMovie:
+      method: POST
+      path: /{movieId}/upload
+      path-parameters:
+        movieId: MovieId
+      request: 
+        name: UploadMovieRequest
+        body: 
+          properties: 
+            length: double
+            video: file
+      errors:
+        - MovieDoesNotExistError        
+
 errors:
   MovieDoesNotExistError:
     status-code: 404
